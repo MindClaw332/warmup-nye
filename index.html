@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nieuwjaarscode-challenge</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tsparticles/confetti@3.0.3/tsparticles.confetti.bundle.min.js"></script>
+    <style>
+    </style>
+</head>
+
+<body class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-cover">
+    <!-- <img src="img/bg-nye.jpg" alt="background"> -->
+    <div class="grid place-items-center ">
+        <div class="inline-block border border-black px-5 my-5 text-center">
+            <h1
+                class="text-3xl font-bold bg-gradient-to-r from-green-700 via-purple-700 to-red-700 bg-clip-text text-transparent">
+                Happy New Year!</h1>
+            <div class=" ">Tijd sinds Nieuwjaar: <span id="time"></span></div>
+            <div class="message " id="message"></div>
+        </div>
+        <label for="resolution" class="block text-sm/6 font-medium text-gray-900">resolution</label>
+        <input
+            class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6"
+            placeholder="add resolution"" type=" text" id="inputtext">
+        <div class="flex flex-col gap-2 " id="resolutions">
+
+        </div>
+        <button
+            class="bg-blue-500 text-slate-200 self-center border border-blue-800 rounded-md px-2 py-1 hover:bg-blue-600 hover:text-slate-300 my-5"
+            onclick="FunnyButton()">do not click it will break</button>
+    </div>
+
+
+
+
+
+    <script>
+        // Coding challenge: Create a countdown timer to New Year's Day 2025
+        // Extend this template with:
+        // - Styling
+        // - Interactivity (! be creative !)
+        // - Librabries
+        // - Responsiveness (tailwind/bootstrap)
+        // Deadline: 13:30
+        // Good luck! and have fun! AND HAPPY NEW YEAR! AND deploy it to Netlify
+        // share in algemeen on teams
+        const input = document.getElementById("inputtext")
+        const renderElement = document.getElementById('resolutions');
+        const resolutionsArray = [];
+        const explosionSound = new Audio("audio/boom.mp3");
+        function updateTimer() {
+            const newYear = new Date('2025-01-01T00:00:00');
+            const now = new Date();
+            const diff = now - newYear;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('time').textContent =
+                `${days} dagen, ${hours} uren, ${minutes} minuten, ${seconds} seconden`;
+        }
+
+        function renderArray() {
+
+            renderElement.innerHTML = '';
+            for (i = 0; i < resolutionsArray.length; i++) {
+                renderElement.innerHTML += `
+                <p class="text-xl text-blue-800 ">${resolutionsArray[i]}</p>
+                `;
+            }
+        }
+
+        function addResolution() {
+            console.log(input.value, 'input');
+            resolutionsArray.push(input.value.toString());
+            input.value = '';
+            renderArray();
+        }
+
+        input.addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                launchConfetti()
+                addResolution()
+            }
+        })
+
+        function launchConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.10 },
+            });
+        }
+
+        // function FunnyButton(){
+        //     explosionSound.play();
+        //     setInterval(close, 3000)
+        // }
+
+        // button.addEventListener("click", FunnyButton);
+
+        renderArray();
+        setInterval(updateTimer, 1000);
+        updateTimer();
+    </script>
+</body>
+
+</html>
