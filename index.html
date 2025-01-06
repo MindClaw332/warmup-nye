@@ -18,8 +18,7 @@
             <h1
                 class="text-3xl font-bold bg-gradient-to-r from-green-700 via-purple-700 to-red-700 bg-clip-text text-transparent">
                 Happy New Year!</h1>
-            <div class=" ">Tijd sinds Nieuwjaar: <span id="time"></span></div>
-            <div class="message " id="message"></div>
+            <div>Tijd sinds Nieuwjaar: <span id="time"></span></div>
         </div>
         <label for="resolution" class="block text-sm/6 font-medium text-gray-900">resolution</label>
         <input
@@ -52,6 +51,7 @@
         const resolutionsArray = [];
         const explosionSound = new Audio("audio/boom.mp3");
         function updateTimer() {
+            console.log('timer updated')
             const newYear = new Date('2025-01-01T00:00:00');
             const now = new Date();
             const diff = now - newYear;
@@ -102,7 +102,7 @@
             setInterval(close, 3000)
         }
 
-        button.addEventListener("click", FunnyButton);
+        // button.addEventListener("click", FunnyButton);
 
         renderArray();
         setInterval(updateTimer, 1000);
